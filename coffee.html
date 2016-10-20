@@ -51,22 +51,30 @@
 
     var myImage = document.getElementById('coffee-image');
     var myRevenueMessage = document.getElementById('revenue');
+    var drinksOrdered = [];
 
     function coffeeBeans(){
         myImage.setAttribute('src','static/coffee_beans.jpg');
     }    
 
-    function makeCoffee(){
+    function coffeeMug(drinkType){
         myImage.setAttribute('src','static/coffee_mug.jpg');
     }
 
     function processingOrder(){
         myImage.setAttribute('src','static/coffee_machine.jpg');
-        setTimeout(makeCoffee,1500);
+        setTimeout(coffeeMug,1500);
         setTimeout(coffeeBeans,4000);
     }
 
-    myImage.addEventListener('click', processingOrder);
+    function makeCoffee(drinkType){
+        drinksOrdered.push(drinkType);
+        console.log(drinksOrdered);
+        processingOrder();
+    }
+
+    myImage.addEventListener('click',
+                             function () { return makeCoffee('brew'); });
 
     coffeeBeans();
 
